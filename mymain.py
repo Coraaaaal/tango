@@ -86,7 +86,8 @@ def train(args):
         model.cuda()
 
      
-    model.train()
+    model.train()#train是整个训练过程的封装，而model.train()则是设置模型的状态。
+    #定义了优化器和学习率调度器，用于更新模型的参数。
     optim = torch.optim.AdamW(model.parameters(), args.learning_rate)
 
     lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optim,

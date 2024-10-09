@@ -107,10 +107,10 @@ def train(args):
         norm_encoded = encoded_text
     # ipdb.set_trace()
 
-    mesh = get_normalize_mesh(args.obj_path)
-    mesh = o3d.t.geometry.TriangleMesh.from_legacy(mesh)
-    scene = o3d.t.geometry.RaycastingScene()
-    scene.add_triangles(mesh)
+    mesh = get_normalize_mesh(args.obj_path)#获取归一化网格
+    mesh = o3d.t.geometry.TriangleMesh.from_legacy(mesh)#转换网格格式
+    scene = o3d.t.geometry.RaycastingScene()#创建光线追踪场景
+    scene.add_triangles(mesh)#添加三角形网格
     trainer = tqdm(range(args.n_iter))
     for i in trainer:
         optim.zero_grad()

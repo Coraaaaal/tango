@@ -15,11 +15,12 @@ import open3d as o3d
 
 def get_normalize_mesh(pro_path):
     mesh = o3d.io.read_triangle_mesh(pro_path)
+    #转换为 NumPy 数组，以便进行后续的数学操作。
     vertices = np.asarray(mesh.vertices)
-    shift = np.mean(vertices,axis=0)
-    scale = np.max(np.linalg.norm(vertices-shift, ord=2, axis=1))
-    vertices = (vertices-shift) / scale
-    mesh.vertices = o3d.cuda.pybind.utility.Vector3dVector(vertices)
+    shift = np.mean(vertices,axis=0)#shift 计算顶点的平均值，作为网格的几何中心。
+    scale = np.max(np.linalg.norm(vertices-shift, ord=2, axis=1))#scale 计算每个顶点到中心的欧几里得距离，并找到最大的距离，作为缩放因子。
+    vertices = (vertices-shift) / scale#归一化顶点：
+    mesh.vertices = o3d.cuda.pybind.utility.Vector3dVector(vertices)#将归一化后的顶点更新到网格对象中，使用 Open3D 提供的特定格式。
     return mesh
     
 def train(args):

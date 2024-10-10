@@ -11,6 +11,7 @@ import numpy as np
 import ipdb
 
 width1 = 712
+#用于生成光线追踪场景中的光线。这两个函数的区别在于参数 width 的处理方式
 def get_rays(elev, azim, r=3.0,width = 512):
     x = r * torch.cos(elev) * torch.cos(azim)
     y = r * torch.sin(elev)

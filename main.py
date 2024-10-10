@@ -56,11 +56,11 @@ def train(args):
     losses = []
     n_augs = args.n_augs
     dir = args.output_dir
-    # global transformation
+    # global transformation 全局变换
     augment_transform = transforms.Compose([
         transforms.RandomResizedCrop(224, scale=(1, 1)), #Obtain a thumbnail image to meet the requirements of clip's input image size
     ])
-    # local transformation
+    # local transformation 局部变换
     normaugment_transform = transforms.Compose([
         transforms.RandomResizedCrop(224, scale=(args.mincrop, args.maxcrop)),
     ])
